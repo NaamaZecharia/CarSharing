@@ -1769,3 +1769,4 @@ node_modules/tslib/modules/index.js
 node_modules/tslib/modules/package.json
 node_modules/tslib/test/validateModuleExportsMatchCommonJS/index.js
 node_modules/tslib/test/validateModuleExportsMatchCommonJS/package.json
+car-sharing/.eslintcache
