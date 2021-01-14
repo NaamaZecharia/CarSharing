@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { createFactory } from 'react';
 import { Router, Switch } from "react-router";
@@ -7,11 +6,11 @@ import SignIn from './Components/SignIn';
 import ErrorPage from './Components/ErrorPage';
 import MainScreen from './Components/MainScreen';
 import CreateRequest from './Components/CreateRequest';
-import CreateCar from './Components/CreateCar';
-import request from './Components/Request';
+import CreateCar from './Components/Car/CreateCar';
+import request from './Components/Request/Request';
 import { render } from 'react-dom';
 import history from './JavaScript/history';
-import Car from './Components/Car';
+import Car from './Components/Car/Car';
 
 
 
@@ -26,9 +25,17 @@ class App extends React.Component{
     }
   }
 
+  getAllUsers(){
+    var result1 = fetch('http://localhost:5000/getAllUsers')
+    var result2 = result1.then(response => response.json())
+    var result3 = result2.then(data => console.log(data));
+
+  }
+
 
   handleLogin(user,psw){
-    if (user==="naama" && psw==='1'){
+    if (user==="naama@gmail.com" && psw==='1234'){
+      
       history.push('/MainScreen')
       this.setState({loginSucc:true, username:user})
     }
@@ -36,6 +43,26 @@ class App extends React.Component{
     alert("username not correct!");
   }
   } 
+
+  handleSignin(email, pass, name, phone, isOwner){
+    history.push('/MainScreen')
+    this.setState({loginSucc:true, username:name})
+    
+    // var url = new URL("https://localhost:5000/signin"),
+    // params = {lat:35.696233, long:139.570431}
+    // Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+    // fetch(url).then(/* … */)
+
+    var emailEncoded = encodeURIComponent(email);
+    var passwordEncoded = encodeURIComponent(pass);
+    var nameEncoded = encodeURIComponent(name);
+    var phoneEncoded = encodeURIComponent(phone);
+    var ownerEncoded = encodeURIComponent(isOwner);
+      return fetch(
+        `http://localhost:5000/signin/${emailEncoded}/${passwordEncoded}/${nameEncoded}/${phoneEncoded}/${ownerEncoded}`
+      ).then((response) => response.json())
+      
+  }
 
   handleRequestCreation(fromDate, toDate){
     if(fromDate !== null && toDate !== null){
@@ -67,6 +94,7 @@ class App extends React.Component{
             <SignIn 
             {...props}
             handleLogin  = {(user, psw)=>this.handleLogin(user, psw)}
+            handleSignin ={(email,pass,name,phone,isOwner)=>this.handleSignin(email,pass,name,phone,isOwner)}
             />)}/>
           
           <Route path="/MainScreen" 

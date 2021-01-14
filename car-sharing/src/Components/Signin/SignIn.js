@@ -14,31 +14,30 @@ class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
+            email: "",
             password: "",
-            name: "",
+            fullName: "",
             phone: null,
             isOwner: false,
-            numberOfCars: 1
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    signin(event){
+    signIn(event){
         // history.push("/MainScreen")
         //boolean validate()
         //create user
-        this.props.handleLogin(this.state.username, this.state.password);
+        this.props.handleSignin(this.state.email, this.state.password, this.state.fullName, this.state.phone, this.state.isOwner);
         // event.preventDefault();
     }
 
     login(event){
-        this.props.handleLogin(this.state.username, this.state.password);
+        this.props.handleLogin(this.state.email, this.state.password);
 
     }
 
-    handleChangeUser(event) {
-        this.setState({ username: event.target.value });
+    handleChangeEmail(event) {
+        this.setState({ email: event.target.value });
       }
 
     handleChangePassword(event) {
@@ -46,7 +45,7 @@ class SignIn extends React.Component {
       }
     
       handleChangeName(event) {
-        this.setState({ name: event.target.value });
+        this.setState({ fullName: event.target.value });
       }
 
       handleChangePhone(event) {
@@ -69,10 +68,10 @@ class SignIn extends React.Component {
             <div className="main">
                 <div className="signin-left" style={signInStyle}>
                   <h3>Sing In</h3>
-                <form onSubmit={() => this.signin()}>
-                    <label for="username">Username:</label><br/>
-                    <input type="text" id="username" name="username" placeholder="Enter Username" 
-                    onChange={(event) => this.handleChangeUser(event)}/><br/>
+                <form onSubmit={() => this.signIn()}>
+                    <label for="email">Email:</label><br/>
+                    <input type="email" id="email" name="email" required placeholder="Enter Email" 
+                    onChange={(event) => this.handleChangeEmail(event)}/><br/>
                     <label for="password">Password:</label><br/>
                     <input type="password" id="password" name="password" placeholder="Enter Password"
                     onChange={(event) => this.handleChangePassword(event)}/><br/>
@@ -94,8 +93,8 @@ class SignIn extends React.Component {
                   <h3>Log In</h3>
                 <form onSubmit={() => this.login()}>
                     <label for="username">Username:</label><br/>
-                    <input type="text" id="username" name="username" placeholder="Enter Username" 
-                    onChange={(event) => this.handleChangeUser(event)}/><br/>
+                    <input type="text" id="email" name="email" placeholder="Enter Email" 
+                    onChange={(event) => this.handleChangeEmail(event)}/><br/>
                     <label for="password">Password:</label><br/>
                     <input type="password" id="password" name="password" placeholder="Enter Password"
                     onChange={(event) => this.handleChangePassword(event)}/><br/><br/>

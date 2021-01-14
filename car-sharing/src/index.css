@@ -55,3 +55,45 @@ label{
   padding: 10px;
   align-content: space-around;
 }
+
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tabs {
+  flex-wrap: wrap;
+  border-bottom: 1px solid #D7DBDD;
+
+}
+
+.tabs label {
+	order: 1;
+	display: block;
+	padding: 1rem 2rem;
+	margin-right: 0.2rem;
+	cursor: pointer;
+  background: #90CAF9;
+  font-weight: bold;
+  transition:  0.2s;
+}
+
+
+.tab-content{
+  width: 100%;
+  padding: 1em;
+  border: 1px solid #ddd;
+  background: #fff;
+  order: 2;
+}
+
+input[type=radio]{
+  display: none;
+}
+
+input[type=radio]:checked{
+  background: #fff;
+  border-bottom: 1px solid black;
+}
+
+
